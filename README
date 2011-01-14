@@ -1,4 +1,11 @@
-MSO 2010 - A lunch schedule system! 
+================================================================================
+
+                                    MSO 2010 
+                            A lunch schedule system! 
+
+           Arno Gregorian, Arnold Jansen, Bart Spaans, Rutger Hommes 
+
+================================================================================
 
 
     (o)--(o)
@@ -46,3 +53,29 @@ MSO 2010 - A lunch schedule system!
           /.-./.-.|               /.-.|.-.\
 
 
+================================================================================
+
+  The root directory is structured as follows:
+
+    sp3files/ 
+
+            Contains all the files provided on the MSO 
+            website in a single directory.
+
+    src/
+            Contains our source code for the project.
+
+================================================================================
+
+  If you are using Eclipse then you might want to install EGit to deal with 
+  the git repository. http://www.eclipse.org/egit/
+
+  I have no experience with EGit, but its documentation and that of github 
+  should get you a long way. Don't hesitate to ask though.
+
+  Git can be quite complicated so try to keep your actions simple (eg. use clear 
+  commit messages that describe what you are commiting, don't push branches and
+  don't push too many different files at once). If all fails, mail me your 
+  changeset and I will merge it in.
+
+================================================================================
