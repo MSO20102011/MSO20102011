@@ -2,7 +2,7 @@ import utils.*;
 
 public class SystemTI implements SLMSTestInterface {
 
-    System system;
+S   SLMS system;
 	/**
 	 * This method should reset the state of the SLMS. At the
 	 * beginning of every test-case that we provide for you, 
