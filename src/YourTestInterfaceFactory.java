@@ -21,6 +21,6 @@ public class YourTestInterfaceFactory {
 		// you need to create an instance of this TI, and
 		// return it.
 		
-		return new SLMSTI() ;
+		return new SystemTI() ;
 	}
 }
