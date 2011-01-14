@@ -59,8 +59,8 @@
 
     sp3files/ 
 
-            Contains all the files provided on the MSO 
-            website in a single directory.
+            Contains all the files from the MSO website needed for this 
+            project. Don't forget to read the README and look at the source.
 
     src/
             Contains our source code for the project.
