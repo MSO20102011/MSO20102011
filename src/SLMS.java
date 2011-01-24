@@ -6,10 +6,10 @@ import java.util.Hashtable;
 public class SLMS {
 
     // We use a hashtable to make lookups on e-mail addresses faster.
-    public Hashtable users; 
-    public Hashtable teachers;
-    public Hashtable admins;
-    public Hashtable classes;
+    public Hashtable<String, User> users; 
+    public Hashtable<String, Teacher> teachers;
+    public Hashtable<String, Administrator> admins;
+    public Hashtable<String, Class> classes;
 
 
     // Implementing the singleton
@@ -26,13 +26,17 @@ public class SLMS {
         classes.clear();
     }
 
+    public void addClass(String name) {
+        classes.put(name, new Class(name));
+    }
+
     public Class getClass(String className) {
-        Class c = (Class) classes.get(className);
+        Class c = classes.get(className);
         if (c == null) throw new IllegalArgumentException();
         return c;
     }
     public Teacher getTeacher(String emailTeacher) {
-        Teacher t = (Teacher) teachers.get(emailTeacher);
+        Teacher t = teachers.get(emailTeacher);
         if (t == null) throw new IllegalArgumentException();
         return t;
     }
