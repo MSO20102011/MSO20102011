@@ -54,12 +54,16 @@ public class SystemTI implements SLMSTestInterface {
 	 * Pre-condition: the teacher and the class already exist in your
 	 * SLMS,
 	 */
-	public void assignTeacher(String emailTeacher, String className) {}
+	public void assignTeacher(String emailTeacher, String className) {
+        system.assignTeacher(emailTeacher, className);
+    }
 	
 	/**
 	 * Check is the given teacher is the teacher of the given class.
 	 */
-	public boolean isTeacherOf(String emailTeacher, String className) { return false; }
+	public boolean isTeacherOf(String emailTeacher, String className) {
+        return system.isTeacherOf(emailTeacher, className);
+    }
 	
 	/**
 	 * This should add a child to the system, and adding her to 
