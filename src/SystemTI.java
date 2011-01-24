@@ -14,14 +14,17 @@ public class SystemTI implements SLMSTestInterface {
 	public void resetSLMS() {
         system = SLMS.getInstance();
         system.resetState();
-        // add admin?
+        // todo: add admin?
     }
 	
 	/**
 	 * This method should add a new school-class with the given name to your
 	 * SLMS. 
 	 */
-	public void addClass(String name) {}
+	public void addClass(String name) {
+        // todo: needs admin?
+        system.addClass(name);
+    }
 	
 	/**
 	 * This method should add a new parent to your SLMS. You need to allow
@@ -30,7 +33,9 @@ public class SystemTI implements SLMSTestInterface {
 	 * 
 	 * Pre-condition: nu user with the same email already exists.
 	 */
-	public void addParent(String name, String email, String pwd) {}
+	public void addParent(String name, String email, String pwd) {
+        system.addParent(name, email, pwd);
+    }
 
 	/**
 	 * This method should add a new teacher to your SLMS. You need to allow
@@ -39,7 +44,9 @@ public class SystemTI implements SLMSTestInterface {
 	 * 
 	 * Pre-condition: nu user with the same email already exists.
 	 */
-	public void addTeacher(String name, String email, String pwd) {}
+	public void addTeacher(String name, String email, String pwd) {
+        system.addTeacher(name, email, pwd);
+    }
 	
 	/**
 	 * Check if a user with the given email exists in your SLMS.

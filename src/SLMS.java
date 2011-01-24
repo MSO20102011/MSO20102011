@@ -7,8 +7,8 @@ public class SLMS {
 
     // We use a hashtable to make lookups on e-mail addresses faster.
     public Hashtable<String, User> users; 
-    public Hashtable<String, Teacher> teachers;
-    public Hashtable<String, Administrator> admins;
+    public Hashtable<String, Teacher> teachers; // Todo: Teacher -> User
+    public Hashtable<String, Administrator> admins; // Todo: Administrator -> User
     public Hashtable<String, Class> classes;
 
 
@@ -28,6 +28,22 @@ public class SLMS {
 
     public void addClass(String name) {
         classes.put(name, new Class(name));
+    }
+
+    public User newUser(String name, String email, String pwd) {
+        User u = new User(name, email, pwd);
+        users.put(email, u);
+        return u;
+    }
+
+    public void addParent(String name, String email, String pwd) {
+        User u = newUser(name, email, pwd);
+        // TODO: add parent role
+    }
+    public void addTeacher(String name, String email, String pwd) {
+        User u = newUser(name, email, pwd);
+        // teachers.put(email, u);
+        // TODO: add teacher role
     }
 
     public Class getClass(String className) {
