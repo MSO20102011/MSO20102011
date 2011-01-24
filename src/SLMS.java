@@ -16,7 +16,6 @@ public class SLMS {
     }
 
     public void resetState() {
-        users.empty();
-
+        users.clear();
     }
 }
