@@ -11,7 +11,11 @@ public class SystemTI implements SLMSTestInterface {
 	 * test-case may decide to put a different population into
 	 * your SLMS.
 	 */
-	public void resetSLMS() {}
+	public void resetSLMS() {
+        system = SLMS.getInstance();
+        system.resetState();
+        // add admin?
+    }
 	
 	/**
 	 * This method should add a new school-class with the given name to your
@@ -40,7 +44,9 @@ public class SystemTI implements SLMSTestInterface {
 	/**
 	 * Check if a user with the given email exists in your SLMS.
 	 */
-	public boolean userExists(String email) { return false; }
+	public boolean userExists(String email) { 
+        return system.users.containsKey(email);
+    }
 	
 	/**
 	 * Assign a teacher to a class. 
