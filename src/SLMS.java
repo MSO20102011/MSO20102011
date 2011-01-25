@@ -16,7 +16,10 @@ public class SLMS {
     private static SLMS instance = null;
     protected SLMS () {} 
     public static SLMS getInstance() {
-        return (instance = instance == null ? new SLMS() : instance);
+        if (instance == null) {
+            instance = new SLMS();
+        }
+        return instance;
     }
 
     public void resetState() {
@@ -67,4 +70,20 @@ public class SLMS {
     public boolean isTeacherOf(String emailTeacher, String className) {
         return getTeacher(emailTeacher).schoolClass.className.equals(className);
     }
+
+    public void addChild(String emailParent, String childName) {
+        // parent opzoeken
+        // child toevoegen.
+
+    }
+    public void addLunch(String emailParent, String childName, SimpleDate date) {
+        // parent opzoeken
+        // child vinden
+    }
+    public void addNoLunchDate(String emailParent, SimpleDate date) {
+        // parent opzoeken
+        // child vinden.
+
+    }
+    
 }
