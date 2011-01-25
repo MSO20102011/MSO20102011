@@ -1,5 +1,5 @@
 
-public class Class {
+public class Child {
 
 	String name;
 }
