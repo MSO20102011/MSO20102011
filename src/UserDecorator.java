@@ -12,17 +12,8 @@ abstract class UserDecorator extends User {
         if (decoratedUser instanceof User) {
             return null;
         }
+        return decoratedUser.getTeacher();
     }
 }
 
 
-class Teacher extends UserDecorator {
-	
-	public Teacher(User u) {
-		super(u);
-	}
-	
-	public void addNoLunchDate(SimpleDate d) {
-		
-	}
-}

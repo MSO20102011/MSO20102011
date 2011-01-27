@@ -7,28 +7,13 @@ public class User {
 	Boolean suspended;
 	Time blockTime;
 	
-	public void login(String email, String password){
-		
-		
-	}
+	public void login(String email, String password){ }
 	
-	public void logout(String email, String password){
-		
-		
-	}
+	public void logout(String email, String password){ }
 	
-	public void viewPupilGroups(){
-		
-		
-	}
+	public void viewPupilGroups(){ }
 	
-	public void viewNoLunchDates(){
-		
-		
-	}
+	public void viewNoLunchDates(){ }
 	
-	public void viewSupervisionSchedule(){
-		
-		
-	}
+	public void viewSupervisionSchedule(){ }
 }

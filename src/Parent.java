@@ -1,12 +1,13 @@
 
 import java.util.LinkedList;
 
-public class Parent {
+public class Parent extends UserDecorator {
 	
 	int allowedMisses;
 	int missesCount;
-	float ownedMoney;
+	int ownedMoney;
     LinkedList<Child> childrenList;
+    LinkedList<Availability> availabilities;
 	
 	public void addChild(Child child) {
         childrenList.add(child);
@@ -14,6 +15,9 @@ public class Parent {
 	public void removeChild(Child child) {
         childrenList.remove(child);
 	}
+    public bool isChildOf(Child child) {
+        childrenList.contains(child);
+    }
 	public void viewLunchSchedule(Child child) {
 		System.out.println(child.getLunchSchedule());
 	}
@@ -26,8 +30,22 @@ public class Parent {
 		
 	}
 	public void addAvailability(Date date, Boolean preferred) {
-		
+        Availability a = new Availability();
+        a.date = date;
+        a.preferred = preferred;
+        return a;
 	}
+
+    public bool isAvailable(SimpleDate d) {
+        for (Availability a : this.availabilities) {
+            if (a.date.equals(d)) {
+                return a.preferred;
+            }
+        }
+        return true;
+    }
+
+
 	public void changeAvailability(Date date, Boolean preferred) {
 		
 	}
@@ -37,5 +55,13 @@ public class Parent {
 	public void swapTurn(SwapRequest swap) {
 		
 	}
+    public bool isPreferred(SimpleDate d) {
+        for (Availability a : this.availabilities) {
+            if (a.date.equals(d)) {
+                return a.preferred;
+            }
+        }
+        return false;
+    }
 
 }

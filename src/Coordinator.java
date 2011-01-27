@@ -1,3 +1,3 @@
-public class Coordinator {
+public class Coordinator extends UserDecorator {
 
 }

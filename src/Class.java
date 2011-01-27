@@ -10,4 +10,11 @@ public class Class {
     public boolean hasNoLunch(SimpleDate d) {
         return noLunches.hasKey(d);
     }
+
+    public void addPupil(Child c) {
+        this.pupils.add(c);
+    }
+    public void hasPupil(Child c) {
+        return pupils.contains(c);
+    }
 }

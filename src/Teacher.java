@@ -1,7 +1,11 @@
-public class Teacher {
+class Teacher extends UserDecorator {
     public Class schoolClass;
-
-    public void addNoLunchDate(SimpleDate d) {
+	
+	public Teacher(User u) {
+		super(u);
+	}
+	
+	public void addNoLunchDate(SimpleDate d) {
         schoolClass.noLunches.add(d);
-    }
+	}
 }

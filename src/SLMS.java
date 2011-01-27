@@ -85,5 +85,60 @@ public class SLMS {
         // child vinden.
 
     }
+    public void addPupil(String childName, String classname) { 
+        child = null; // child opzoeken
+        c = null; // class opzoeken
+        c.addPupil(child);
+    }
+
+    public bool hasNoLunch(String classname, SimpleDate d) {
+        c = null; // class opzoeken
+        return c.hasNoLunch(d);
+    }
+    public void addUnavailableDate(String emailParent, SimpleDate d) {
+        p = null; // parent opzoeken
+        return p.addAvailability(d, false);
+    }
+    public void addPreferDate(String emailParent, SimpleDate d) {
+        p = null; // parent opzoeken
+        return p.addAvailability(d, true);
+    }
+    public bool isAvailable(String emailParent, SimpleDate d) {
+        p = null; // parent opzoeken
+        return p.isAvailable(d);
+    }
+    public bool isUnavailable(String emailParent, SimpleDate d) {
+        return this.isAvailable(emailParent, d);
+
+    }
+    public bool isPreferred(String emailParent, SimpleDate d) {
+        p = null; // parent opzoeken
+        return p.isPreferred(d);
+
+    }
+    public bool isPupilOf(String childName, String className) {
+        ch = null;
+        c = null;
+        return c.hasPupil(ch);
+    }
+    public bool isChildOf(String childName, String emailParent) {
+        ch = null; // child opzoeken
+        p = null; // parent opzoeken
+        return p.isChildOf(ch);
+    }
+    public void setToPayAFrontCostScheme(String emailParent, String childName) {
+        ch = null; //child opzoeken
+        p = null; // parent opzoeken
+        if (p.isChildOf(ch)) 
+            ch.setToPayAFrontCostScheme();
+    }
+    public void setToStandardCostScheme(String emailParent, String childName) {
+        ch = null;
+        p = null;
+        if (p.isChildOf(ch)) 
+            ch.setToStandardCostScheme();
+    }
+
+
     
 }

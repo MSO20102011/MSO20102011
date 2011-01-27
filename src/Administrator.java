@@ -1,4 +1,4 @@
-public class Administrator {
+public class Administrator extends UserDecorator {
 
     public RegistrationManager registration;
     
