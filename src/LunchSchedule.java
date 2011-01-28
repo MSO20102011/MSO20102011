@@ -1,7 +1,8 @@
 import java.util.LinkedList;
+import utils.*;
 
 public class LunchSchedule {
-    LinkedList<Date> lunches;
+    LinkedList<SimpleDate> lunches;
 
     public void addLunch(SimpleDate d) {
         lunches.add(d);

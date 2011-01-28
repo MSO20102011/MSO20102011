@@ -1,4 +1,4 @@
-
+import utils.*;
 import java.util.LinkedList;
 
 public class Parent extends UserDecorator {
@@ -15,28 +15,25 @@ public class Parent extends UserDecorator {
 	public void removeChild(Child child) {
         childrenList.remove(child);
 	}
-    public bool isChildOf(Child child) {
+    public boolean isChildOf(Child child) {
         childrenList.contains(child);
     }
-	public void viewLunchSchedule(Child child) {
-		System.out.println(child.getLunchSchedule());
+	public void viewLunchSchedule(Child child) { }
+	public void addLunchDate(Child child, SimpleDate date) {
 	}
-	public void addLunchDate(Child child, Date date) {
-	}
-	public void remLunchDate(Child child, Date date) {
+	public void remLunchDate(Child child, SimpleDate date) {
 		
 	}
 	public void viewAvailability() {
 		
 	}
-	public void addAvailability(Date date, Boolean preferred) {
+	public void addAvailability(SimpleDate date, Boolean preferred) {
         Availability a = new Availability();
         a.date = date;
         a.preferred = preferred;
-        return a;
 	}
 
-    public bool isAvailable(SimpleDate d) {
+    public boolean isAvailable(SimpleDate d) {
         for (Availability a : this.availabilities) {
             if (a.date.equals(d)) {
                 return a.preferred;
@@ -46,16 +43,16 @@ public class Parent extends UserDecorator {
     }
 
 
-	public void changeAvailability(Date date, Boolean preferred) {
+	public void changeAvailability(SimpleDate date, Boolean preferred) {
 		
 	}
-	public void removeAvailability(Date date) {
+	public void removeAvailability(SimpleDate date) {
 		
 	}
 	public void swapTurn(SwapRequest swap) {
 		
 	}
-    public bool isPreferred(SimpleDate d) {
+    public boolean isPreferred(SimpleDate d) {
         for (Availability a : this.availabilities) {
             if (a.date.equals(d)) {
                 return a.preferred;

@@ -1,3 +1,4 @@
+import utils.*;
 
 public class Child {
 
@@ -6,13 +7,13 @@ public class Child {
     CostScheme costscheme;
 
     public boolean hasLunch(SimpleDate d) {
-        return schedule.lunches.hasKey(d);
+        return schedule.lunches.contains(d);
     }
 
-    public setToPayAFrontCostScheme() {
+    public void setToPayAFrontCostScheme() {
         costscheme = new PayUpFrontScheme();
     }
-    public setToStandardCostScheme() {
+    public void setToStandardCostScheme() {
         costscheme = new StandardScheme();
 
     }

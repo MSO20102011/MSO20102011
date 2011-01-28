@@ -1,6 +1,7 @@
 /* We changed the name from System to SLMS, because System
  * is already imported by default in java. */
 
+import utils.*;
 import java.util.Hashtable;
 
 public class SLMS {
@@ -68,7 +69,7 @@ public class SLMS {
     }
     
     public boolean isTeacherOf(String emailTeacher, String className) {
-        return getTeacher(emailTeacher).schoolClass.className.equals(className);
+        return getTeacher(emailTeacher).schoolClass.name.equals(className);
     }
 
     public void addChild(String emailParent, String childName) {
@@ -86,55 +87,55 @@ public class SLMS {
 
     }
     public void addPupil(String childName, String classname) { 
-        child = null; // child opzoeken
-        c = null; // class opzoeken
+        Child child = null; // child opzoeken
+        Class c = null; // class opzoeken
         c.addPupil(child);
     }
 
-    public bool hasNoLunch(String classname, SimpleDate d) {
-        c = null; // class opzoeken
+    public boolean hasNoLunch(String classname, SimpleDate d) {
+        Class c = null; // class opzoeken
         return c.hasNoLunch(d);
     }
     public void addUnavailableDate(String emailParent, SimpleDate d) {
-        p = null; // parent opzoeken
-        return p.addAvailability(d, false);
+        Parent p = null; // parent opzoeken
+        p.addAvailability(d, false);
     }
     public void addPreferDate(String emailParent, SimpleDate d) {
-        p = null; // parent opzoeken
-        return p.addAvailability(d, true);
+        Parent p = null; // parent opzoeken
+        p.addAvailability(d, true);
     }
-    public bool isAvailable(String emailParent, SimpleDate d) {
-        p = null; // parent opzoeken
+    public boolean isAvailable(String emailParent, SimpleDate d) {
+        Parent p = null; // parent opzoeken
         return p.isAvailable(d);
     }
-    public bool isUnavailable(String emailParent, SimpleDate d) {
+    public boolean isUnavailable(String emailParent, SimpleDate d) {
         return this.isAvailable(emailParent, d);
 
     }
-    public bool isPreferred(String emailParent, SimpleDate d) {
-        p = null; // parent opzoeken
+    public boolean isPreferred(String emailParent, SimpleDate d) {
+        Parent p = null; // parent opzoeken
         return p.isPreferred(d);
 
     }
-    public bool isPupilOf(String childName, String className) {
-        ch = null;
-        c = null;
+    public boolean isPupilOf(String childName, String className) {
+        Child ch = null;
+        Class c = null;
         return c.hasPupil(ch);
     }
-    public bool isChildOf(String childName, String emailParent) {
-        ch = null; // child opzoeken
-        p = null; // parent opzoeken
+    public boolean isChildOf(String childName, String emailParent) {
+        Child ch = null; // child opzoeken
+        Parent p = null; // parent opzoeken
         return p.isChildOf(ch);
     }
     public void setToPayAFrontCostScheme(String emailParent, String childName) {
-        ch = null; //child opzoeken
-        p = null; // parent opzoeken
+        Child ch = null; //child opzoeken
+        Parent p = null; // parent opzoeken
         if (p.isChildOf(ch)) 
             ch.setToPayAFrontCostScheme();
     }
     public void setToStandardCostScheme(String emailParent, String childName) {
-        ch = null;
-        p = null;
+        Child ch = null;
+        Parent p = null;
         if (p.isChildOf(ch)) 
             ch.setToStandardCostScheme();
     }

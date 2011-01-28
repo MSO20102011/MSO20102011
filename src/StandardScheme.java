@@ -4,9 +4,9 @@
 public class StandardScheme implements CostScheme 
 {
 
-	public int CalculateCost(Child child, int year)
+	public int calculateCost(Child child, int year)
 	{
 		
-		return child.schedule.lunches.length()*150;
+		return child.schedule.lunches.size() * 150;
 	}
 }

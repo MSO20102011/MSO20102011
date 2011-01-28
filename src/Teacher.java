@@ -1,3 +1,5 @@
+import utils.*;
+
 class Teacher extends UserDecorator {
     public Class schoolClass;
 	

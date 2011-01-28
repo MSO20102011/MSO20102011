@@ -1,9 +1,10 @@
+import utils.*;
 
 public class Lunch {
 
-	Date date;
+	SimpleDate date;
 	
-	public Lunch(Date d) {
+	public Lunch(SimpleDate d) {
 		date = d;
 	}
 	

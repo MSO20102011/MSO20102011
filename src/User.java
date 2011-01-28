@@ -6,6 +6,12 @@ public class User {
 	String name, address, email, password;
 	Boolean suspended;
 	Time blockTime;
+
+    public User(String name, String email, String passwd) {
+        this.name = name;
+        this.email = email;
+        this.password = passwd;
+    }
 	
 	public void login(String email, String password){ }
 	

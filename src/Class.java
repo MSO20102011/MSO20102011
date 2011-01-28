@@ -1,20 +1,26 @@
-
+import utils.*;
 import java.util.LinkedList;
 
 public class Class {
 
 	String name;
+    Teacher teacher;
     LinkedList<Child> pupils;
-    LinkedList<Date> noLunches;
+    LinkedList<SimpleDate> noLunches;
+
+    public Class(String name) {
+        this.name = name;
+        this.teacher = null;
+    }
     
     public boolean hasNoLunch(SimpleDate d) {
-        return noLunches.hasKey(d);
+        return noLunches.contains(d);
     }
 
     public void addPupil(Child c) {
         this.pupils.add(c);
     }
-    public void hasPupil(Child c) {
+    public boolean hasPupil(Child c) {
         return pupils.contains(c);
     }
 }

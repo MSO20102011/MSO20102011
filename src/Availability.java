@@ -1,7 +1,9 @@
 
+import utils.*;
+
 public class Availability {
 	
-	Date date;
-	Boolean preferred;
+	SimpleDate date;
+	boolean preferred;
 	
 }

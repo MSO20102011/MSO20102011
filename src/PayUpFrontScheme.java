@@ -2,10 +2,10 @@
 public class PayUpFrontScheme implements CostScheme 
 {
 
-	public int CalculateCost(Child child, int year)
+	public int calculateCost(Child child, int year)
 	{
-		if( child.schedule.lunches.length()<20)
+		if( child.schedule.lunches.size()<20)
 			return 0;
-		else return (child.schedule.lunches.length()-20)*250;
+		else return (child.schedule.lunches.size()-20)*250;
 	}
 }
