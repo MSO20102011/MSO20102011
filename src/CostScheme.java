@@ -1,7 +1,6 @@
 
 public interface CostScheme 
 {
-
-	public int calculateCost(Child child, int year);
+	public int calculateCost(Child ch, int year);
 	
 }

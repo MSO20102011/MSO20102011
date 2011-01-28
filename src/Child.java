@@ -9,7 +9,7 @@ public class Child {
     public Child(String name) {
         this.name = name;
         this.schedule = new LunchSchedule();
-        this.costscheme = new PayUpFrontScheme();
+        this.costscheme = new StandardScheme();
     }
     public boolean hasLunch(SimpleDate d) {
         return schedule.lunches.contains(d);
@@ -20,5 +20,8 @@ public class Child {
     }
     public void setToStandardCostScheme() {
         costscheme = new StandardScheme();
+    }
+    public int calculateCost(int year) {
+        return costscheme.calculateCost(this, year);
     }
 }

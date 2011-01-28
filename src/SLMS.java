@@ -186,9 +186,14 @@ public class SLMS {
         return getClass(className).hasPupil(ch);
     }
     public boolean isChildOf(String childName, String emailParent) {
-        Child ch = getChildByName(childName);
-        Parent p = getParent(emailParent);
-        return p.isChildOf(ch);
+        try {
+            Child ch = getChildByName(childName);
+            Parent p = getParent(emailParent);
+            return p.isChildOf(ch);
+        }
+        catch (Exception IllegalArgumentException) {
+            return false;
+        }
     }
     public void setToPayAFrontCostScheme(String emailParent, String childName) {
         Child ch = getChildByName(childName);
@@ -208,7 +213,6 @@ public class SLMS {
         registeredUsers.put(teacherEmail, p);
     }
 
-    public void removeParentRoleFromTeacher(String teacherEmail) {}
     public void promote(String emailParent) {}
     public void demote(String coordinator) {}
     public boolean isCoordinator(String emailUser) { 
@@ -220,11 +224,33 @@ public class SLMS {
             return false;
         }
     }
-    public int calculateCost(String childName, int year) { return 0; }
+    public int calculateCost(String childName, int year) { 
+        return getChildByName(childName).calculateCost(year);
+    
+    }
 
     public boolean hasLunch(String childName, SimpleDate d) { 
-        Child ch = getChildByName(childName);
-        return ch.hasLunch(d);
+        return getChildByName(childName).hasLunch(d);
     }
-    
+    public void removeParentRoleFromTeacher(String teacherEmail) {
+        User u = getUser(teacherEmail);
+        if (u instanceof Parent) {
+            u = ((Parent) u).decoratedUser;
+        }
+        else {
+            u = removeParentRole(u);
+        }
+        registeredUsers.put(teacherEmail, u);
+    }
+
+    public User removeParentRole(User u) {
+        if (u instanceof Parent) {
+            return removeParentRole(((Parent) u).decoratedUser);
+        }
+        if (u instanceof UserDecorator) {
+            User n = removeParentRole(((UserDecorator )u).decoratedUser);
+            ((UserDecorator) u).decoratedUser = n;
+        }
+        return u;
+    }
 }
