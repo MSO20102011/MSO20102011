@@ -75,5 +75,7 @@ public class Parent extends UserDecorator {
 
     /* Remove the availability preference.*/
     public void removeAvailability(SimpleDate date) { } 
+
+    /* Confirm a swap request. */
     public void swapTurn(SwapRequest swap) { }
 }
