@@ -24,14 +24,20 @@ public class SLMS {
     }
 
     public void resetState() {
-        this.users = new Hashtable<String,User> ();
+        this.users    = new Hashtable<String, User> ();
         this.teachers = new Hashtable<String, Teacher> ();
-        this.admins = new Hashtable <String, Administrator> ();
-        this.classes = new Hashtable <String, Class>();
+        this.admins   = new Hashtable<String, Administrator> ();
+        this.classes  = new Hashtable<String, Class>();
     }
 
     public void addClass(String name) {
         classes.put(name, new Class(name));
+    }
+
+    public Class getClass(String className) {
+        Class c = classes.get(className);
+        if (c == null) throw new IllegalArgumentException();
+        return c;
     }
 
     public User newUser(String name, String email, String pwd) {
@@ -42,19 +48,15 @@ public class SLMS {
 
     public void addParent(String name, String email, String pwd) {
         User u = newUser(name, email, pwd);
-        // TODO: add parent role
+        Parent p = new Parent(u);
+        users.put(email, p);
     }
     public void addTeacher(String name, String email, String pwd) {
         User u = newUser(name, email, pwd);
-        // teachers.put(email, u);
-        // TODO: add teacher role
+        Teacher t = new Teacher(u);
+        users.put(email, t);
     }
 
-    public Class getClass(String className) {
-        Class c = classes.get(className);
-        if (c == null) throw new IllegalArgumentException();
-        return c;
-    }
     public Teacher getTeacher(String emailTeacher) {
         Teacher t = teachers.get(emailTeacher);
         if (t == null) throw new IllegalArgumentException();
@@ -88,13 +90,12 @@ public class SLMS {
     }
     public void addPupil(String childName, String classname) { 
         Child child = null; // child opzoeken
-        Class c = null; // class opzoeken
+        Class c = getClass(classname);
         c.addPupil(child);
     }
 
     public boolean hasNoLunch(String classname, SimpleDate d) {
-        Class c = null; // class opzoeken
-        return c.hasNoLunch(d);
+        return getClass(classname).hasNoLunch(d);
     }
     public void addUnavailableDate(String emailParent, SimpleDate d) {
         Parent p = null; // parent opzoeken
@@ -118,9 +119,8 @@ public class SLMS {
 
     }
     public boolean isPupilOf(String childName, String className) {
-        Child ch = null;
-        Class c = null;
-        return c.hasPupil(ch);
+        Child ch = null; // child opzoeken
+        return getClass(className).hasPupil(ch);
     }
     public boolean isChildOf(String childName, String emailParent) {
         Child ch = null; // child opzoeken
