@@ -24,10 +24,10 @@ public class SLMS {
     }
 
     public void resetState() {
-        users.clear();
-        teachers.clear();
-        admins.clear();
-        classes.clear();
+        this.users = new Hashtable<String,User> ();
+        this.teachers = new Hashtable<String, Teacher> ();
+        this.admins = new Hashtable <String, Administrator> ();
+        this.classes = new Hashtable <String, Class>();
     }
 
     public void addClass(String name) {

@@ -1,10 +1,11 @@
 
 
 abstract class UserDecorator extends User {
-	protected User decoratedUser;
-	public UserDecorator(User u) {
-		decoratedUser = u;
-	}
+    protected User decoratedUser;
+    public UserDecorator(){}
+    public UserDecorator(User u) {
+        decoratedUser = u;
+    }
 
     /*
     public Teacher getTeacher() {
