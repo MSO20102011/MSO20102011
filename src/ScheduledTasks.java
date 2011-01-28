@@ -1,6 +1,12 @@
 
 public class ScheduledTasks {
 
+	SLMS system;
+
+	public ScheduledTasks(SLMS sys) {
+		this.system = sys;
+	}
+
 	public void calculateFine() {
 		
 	}

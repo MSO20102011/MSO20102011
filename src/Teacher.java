@@ -7,7 +7,13 @@ class Teacher extends UserDecorator {
 		super(u);
 	}
 	
+    /* Add a date to class's schedule on which there are no lunches. */
 	public void addNoLunchDate(SimpleDate d) {
         schoolClass.noLunches.add(d);
 	}
+    
+    /* Remove a previously declared date from the no-lunch-schedule. */
+    public void removeNoLunchDate(SimpleDate d) {
+        schoolClass.noLunches.remove(d);
+    }
 }
