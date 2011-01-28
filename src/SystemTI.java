@@ -222,7 +222,7 @@ public class SystemTI implements SLMSTestInterface {
 	 * Pre-cond: the parent and child should exist. The child should belong to the parent.
 	 */
 	public void setToPayAfrontCostScheme(String emailParent, String childName) {
-		system.setToStandardCostScheme(emailParent, childName);
+		system.setToPayAfrontCostScheme(emailParent, childName);
 	}
 	
 	/**

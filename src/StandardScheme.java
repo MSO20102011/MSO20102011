@@ -11,7 +11,6 @@ public class StandardScheme implements CostScheme
                 n++;
             }
         }
-        System.out.printf("%d\n", n);
 		return n * 150;
 	}
 }

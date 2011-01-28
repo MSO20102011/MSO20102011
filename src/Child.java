@@ -19,11 +19,11 @@ public class Child {
         return schedule.lunches.contains(d);
     }
 
-    public void setToPayAFrontCostScheme() {
-        costscheme = new PayUpFrontScheme();
+    public void setToPayAfrontCostScheme() {
+        this.costscheme = new PayUpFrontScheme();
     }
     public void setToStandardCostScheme() {
-        costscheme = new StandardScheme();
+        this.costscheme = new StandardScheme();
     }
     public int calculateCost(int year) {
         return costscheme.calculateCost(this, year);

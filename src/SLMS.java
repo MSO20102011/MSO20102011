@@ -197,11 +197,11 @@ public class SLMS {
             return false;
         }
     }
-    public void setToPayAFrontCostScheme(String emailParent, String childName) {
+    public void setToPayAfrontCostScheme(String emailParent, String childName) {
         Child ch = getChildByName(childName);
         Parent p = getParent(emailParent);
         if (p.isChildOf(ch)) 
-            ch.setToPayAFrontCostScheme();
+            ch.setToPayAfrontCostScheme();
     }
     public void setToStandardCostScheme(String emailParent, String childName) {
         Child ch = getChildByName(childName);
