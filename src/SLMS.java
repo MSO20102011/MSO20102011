@@ -8,16 +8,14 @@ public class SLMS {
 
     // We use a hashtable to make lookups on e-mail addresses faster.
     public Hashtable<String, User> registeredUsers; 
-    public Hashtable<String, Administrator> admins; // Todo: User?
+    public Hashtable<String, Administrator> admins;
     public Hashtable<String, Class> classes;
 
     // Implementing the singleton
     private static SLMS instance = null;
     protected SLMS () {} 
     public static SLMS getInstance() {
-        if (instance == null) {
-            instance = new SLMS();
-        }
+        if (instance == null) instance = new SLMS(); 
         return instance;
     }
 
@@ -56,6 +54,9 @@ public class SLMS {
 
     public User getUser(String email) {
         return registeredUsers.get(email);
+    }
+    public Administrator getAdmin(String admin) {
+        return admins.get(admin);
     }
 
     public Teacher getTeacher(User u) {
@@ -152,11 +153,9 @@ public class SLMS {
         Teacher t = getTeacher(emailTeacher);
         t.addNoLunchDate(date);
     }
-    public void addPupil(String childName, String classname) { 
-        Child child = new Child(childName);
-        Class c = getClass(classname);
-        c.addPupil(child);
-        child.class_ = c;
+    public void addPupil(String admin, String childName, String classname) { 
+        Administrator a = getAdmin(admin);
+        a.addChild(getClass(classname), new Child(childName));
     }
 
     public boolean hasNoLunch(String classname, SimpleDate d) {
@@ -215,8 +214,14 @@ public class SLMS {
         registeredUsers.put(teacherEmail, p);
     }
 
-    public void promote(String emailParent) {}
-    public void demote(String coordinator) {}
+    public void promote(String admin, String emailParent) {
+        getAdmin(admin).promote(emailParent);
+    }
+    public void demote(String admin, String coordinator) {
+        getAdmin(admin).demote(coordinator);
+    }
+
+
     public boolean isCoordinator(String emailUser) { 
         try {
             Coordinator c = getCoordinator(emailUser);
@@ -236,13 +241,7 @@ public class SLMS {
     }
     public void removeParentRoleFromTeacher(String teacherEmail) {
         User u = getUser(teacherEmail);
-        if (u instanceof Parent) {
-            u = ((Parent) u).decoratedUser;
-        }
-        else {
-            u = removeParentRole(u);
-        }
-        registeredUsers.put(teacherEmail, u);
+        registeredUsers.put(teacherEmail, removeParentRole(u));
     }
 
     public User removeParentRole(User u) {

@@ -3,6 +3,7 @@ import utils.*;
 public class SystemTI implements SLMSTestInterface {
 
     SLMS system;
+	String ADMIN;
 	/**
 	 * This method should reset the state of the SLMS. At the
 	 * beginning of every test-case that we provide for you, 
@@ -14,7 +15,13 @@ public class SystemTI implements SLMSTestInterface {
 	public void resetSLMS() {
         system = SLMS.getInstance();
         system.resetState();
-        // todo: add admin?
+
+		// we stole the ADMIN idea
+		ADMIN = "root@localhost";
+		User u = new User("ADMIN", ADMIN, "hunter2");
+		Administrator a = new Administrator(u, system);
+		system.admins.put(ADMIN, a);
+		system.registeredUsers.put(ADMIN, a);
     }
 	
 	/**
@@ -79,7 +86,7 @@ public class SystemTI implements SLMSTestInterface {
 	 * Pre-condition: the class already exists.
 	 */
 	public void addPupil(String childName, String className) {
-		system.addPupil(childName, className);
+		system.addPupil(ADMIN, childName, className);
 	}
 	
 	/**
@@ -241,7 +248,7 @@ public class SystemTI implements SLMSTestInterface {
 	 * Pre-cond: the parent should exist.
 	 */
 	public void promoteToCoordinator(String emailParent) {
-		system.promote(emailParent);
+		system.promote(ADMIN, emailParent);
 	}
 
 	/**
@@ -250,7 +257,7 @@ public class SystemTI implements SLMSTestInterface {
 	 * Pre-cond: the parent should exist.
 	 */
 	public void demoteFromCoordinator(String emailCoordinator) {
-		system.demote(emailCoordinator);
+		system.demote(ADMIN, emailCoordinator);
 	}
 	
 	/**
