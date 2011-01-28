@@ -1,6 +1,11 @@
 public class Administrator extends UserDecorator {
 
     public RegistrationManager registration;
+
+
+	public Administrator(User u) {
+		super(u);
+	}
     
     public void promote(Parent parent) {
 

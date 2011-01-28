@@ -11,6 +11,8 @@ public class Class {
     public Class(String name) {
         this.name = name;
         this.teacher = null;
+        this.pupils = new LinkedList<Child>();
+        this.noLunches = new LinkedList<SimpleDate>();
     }
     
     public boolean hasNoLunch(SimpleDate d) {

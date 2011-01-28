@@ -7,10 +7,9 @@ import java.util.Hashtable;
 public class SLMS {
 
     // We use a hashtable to make lookups on e-mail addresses faster.
-    public Hashtable<String, User> users; 
-    public Hashtable<String, Administrator> admins; // Todo: Administrator -> User
+    public Hashtable<String, User> registeredUsers; 
+    public Hashtable<String, Administrator> admins; // Todo: User?
     public Hashtable<String, Class> classes;
-
 
     // Implementing the singleton
     private static SLMS instance = null;
@@ -23,7 +22,7 @@ public class SLMS {
     }
 
     public void resetState() {
-        this.users    = new Hashtable<String, User> ();
+        this.registeredUsers    = new Hashtable<String, User> ();
         this.admins   = new Hashtable<String, Administrator> ();
         this.classes  = new Hashtable<String, Class>();
     }
@@ -40,19 +39,19 @@ public class SLMS {
 
     public User newUser(String name, String email, String pwd) {
         User u = new User(name, email, pwd);
-        users.put(email, u);
+        registeredUsers.put(email, u);
         return u;
     }
 
     public void addParent(String name, String email, String pwd) {
         User u = newUser(name, email, pwd);
         Parent p = new Parent(u);
-        users.put(email, p);
+        registeredUsers.put(email, p);
     }
     public void addTeacher(String name, String email, String pwd) {
         User u = newUser(name, email, pwd);
         Teacher t = new Teacher(u);
-        users.put(email, t);
+        registeredUsers.put(email, t);
     }
 
     public Teacher getTeacher(User u) {
@@ -65,7 +64,7 @@ public class SLMS {
         return null;
     }
     public Teacher getTeacher(String emailTeacher) {
-        User u = users.get(emailTeacher);
+        User u = registeredUsers.get(emailTeacher);
         Teacher t = getTeacher(u);
         if (t == null) throw new IllegalArgumentException();
         return t;
@@ -82,10 +81,21 @@ public class SLMS {
 
     }
     public Parent getParent(String emailParent) {
-        User u = users.get(emailParent);
+        User u = registeredUsers.get(emailParent);
         Parent p = getParent(u);
         if (p == null) throw new IllegalArgumentException();
         return p;
+    }
+
+    public Child getChildByName(String childName) {
+        for (Class c : this.classes.values()) {
+            for (Child ch : c.pupils) {
+                if (ch.name.equals(childName)) {
+                    return ch;
+                }
+            }
+        }
+        throw new IllegalArgumentException();
     }
 
     public void assignTeacher(String emailTeacher, String className) {
@@ -105,21 +115,23 @@ public class SLMS {
     }
 
     public void addChild(String emailParent, String childName) {
-        // parent opzoeken
-        // child toevoegen.
-
+        Parent p = getParent(emailParent); 
+        Child ch = getChildByName(childName);
+        p.addChild(ch);
     }
     public void addLunch(String emailParent, String childName, SimpleDate date) {
-        // parent opzoeken
-        // child vinden
+        Parent p = getParent(emailParent);
+        Child ch = getChildByName(childName);
+        if (p.isChildOf(ch)) {
+            // TODO: p.addLunch(ch, date);
+        }
     }
-    public void addNoLunchDate(String emailParent, SimpleDate date) {
-        // parent opzoeken
-        // child vinden.
-
+    public void addNoLunchDate(String emailTeacher, SimpleDate date) {
+        Teacher t = getTeacher(emailTeacher);
+        t.addNoLunchDate(date);
     }
     public void addPupil(String childName, String classname) { 
-        Child child = null; // child opzoeken
+        Child child = new Child(childName);
         Class c = getClass(classname);
         c.addPupil(child);
     }
@@ -149,27 +161,32 @@ public class SLMS {
 
     }
     public boolean isPupilOf(String childName, String className) {
-        Child ch = null; // child opzoeken
+        Child ch = getChildByName(childName);
         return getClass(className).hasPupil(ch);
     }
     public boolean isChildOf(String childName, String emailParent) {
-        Child ch = null; // child opzoeken
+        Child ch = getChildByName(childName);
         Parent p = getParent(emailParent);
         return p.isChildOf(ch);
     }
     public void setToPayAFrontCostScheme(String emailParent, String childName) {
-        Child ch = null; //child opzoeken
+        Child ch = getChildByName(childName);
         Parent p = getParent(emailParent);
         if (p.isChildOf(ch)) 
             ch.setToPayAFrontCostScheme();
     }
     public void setToStandardCostScheme(String emailParent, String childName) {
-        Child ch = null;
-        Parent p = null;
+        Child ch = getChildByName(childName);
+        Parent p = getParent(emailParent);
         if (p.isChildOf(ch)) 
             ch.setToStandardCostScheme();
     }
-
-
+    public void addParentRoleToTeacher(String teacherEmail) {}
+    public void removeParentRoleFromTeacher(String teacherEmail) {}
+    public void promote(String emailParent) {}
+    public void demote(String coordinator) {}
+    public boolean isCoordinator(String emailUser) { return false;}
+    public int calculateCost(String childName, int year) { return 0; }
+    public boolean hasLunch(String childName, SimpleDate d) { return false; }
     
 }

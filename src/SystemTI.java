@@ -52,7 +52,7 @@ public class SystemTI implements SLMSTestInterface {
 	 * Check if a user with the given email exists in your SLMS.
 	 */
 	public boolean userExists(String email) { 
-        return system.users.containsKey(email);
+        return system.registeredUsers.containsKey(email);
     }
 	
 	/**
@@ -78,12 +78,16 @@ public class SystemTI implements SLMSTestInterface {
 	 * 
 	 * Pre-condition: the class already exists.
 	 */
-	public void addPupil(String childName, String className) {}
+	public void addPupil(String childName, String className) {
+		system.addPupil(childName, className);
+	}
 	
 	/**
 	 * Check if the given pupil is a pupil of the given class.
 	 */
-	public boolean isPupilOf(String childName, String className) { return false; }
+	public boolean isPupilOf(String childName, String className) { 
+		return system.isPupilOf(childName, className);
+	}
 	
 	/**
 	 * This add a child to a parent's list of children. 
@@ -91,12 +95,16 @@ public class SystemTI implements SLMSTestInterface {
 	 * Pre-condition: the parent already exists, and the child
 	 * must already be a pupil in some class.
 	 */
-	public void addChild(String emailParent, String childName) {}
+	public void addChild(String emailParent, String childName) {
+		system.addChild(emailParent, childName);
+	}
 
 	/**
 	 * Check if a child belongs to the children of a parent.
 	 */
-	public boolean isChildOf(String childName, String emailParent) { return false; }
+	public boolean isChildOf(String childName, String emailParent) { 
+		return system.isChildOf(childName, emailParent);
+	}
 
 	/**
 	 * Add a lunch date for a child that belongs to a parent.
@@ -104,49 +112,63 @@ public class SystemTI implements SLMSTestInterface {
 	 * Pre-condition: both the child and parent should already exists. 
 	 * The child should be a child of the parent.
 	 */
-	public void addLunchDate(String emailParent, String childName, SimpleDate date) {}
+	public void addLunchDate(String emailParent, String childName, SimpleDate date) {
+		system.addLunch(emailParent, childName, date);
+	}
 	
 	/**
 	 * Check whether a child has a lunch scheduled on the given date.
 	 * 
 	 * Pre-condition: the child already exists.
 	 */
-	public boolean hasLunch(String childName, SimpleDate date) { return false; }
+	public boolean hasLunch(String childName, SimpleDate date) { 
+		return system.hasLunch(childName, date);
+	}
 	
 	/**
 	 * This is to add a preferred supervision date of a parent.
 	 * 
 	 * Pre-condition: the parent should exist.
 	 */
-	public void addPreferDate(String emailParent, SimpleDate date) {}
+	public void addPreferDate(String emailParent, SimpleDate date) {
+		system.addPreferDate(emailParent, date);
+	}
 	
 	/**
 	 * This is to add a date where a parent would be unavailable for supervision.
 	 * 
 	 * Pre-cond: the parent should exist.
 	 */
-	public void addUnavailableDate(String emailParent, SimpleDate date) {}
+	public void addUnavailableDate(String emailParent, SimpleDate date) {
+		system.addUnavailableDate(emailParent, date);
+	}
 	
 	/**
 	 * This is to check if the parent is available for supervision on a given dat.
 	 * 
 	 * Pre-cond: the parent should exist.
 	 */
-	public boolean isAvailable(String emailParent, SimpleDate date) { return false; }
+	public boolean isAvailable(String emailParent, SimpleDate date) { 
+		return system.isAvailable(emailParent, date);
+	}
 	
 	/**
 	 * This is to check if the parent is unavailable for supervision on a given dat.
 	 * 
 	 * Pre-cond: the parent should exist.
 	 */
-	public boolean isUnavailable(String emailParent, SimpleDate date) { return false; }
+	public boolean isUnavailable(String emailParent, SimpleDate date) {
+		return system.isUnavailable(emailParent, date);
+	}
 
 	/**
 	 * This is to check if the parent prefers a given date to do supervision.
 	 * 
 	 * Pre-cond: the parent should exist.
 	 */
-	public boolean isPreferred(String emailParent, SimpleDate date) { return false; }
+	public boolean isPreferred(String emailParent, SimpleDate date) { 
+		return system.isPreferred(emailParent, date);
+	}
 
 	/**
 	 * This is to add a date that a teacher indicates that on that date there
@@ -154,42 +176,54 @@ public class SystemTI implements SLMSTestInterface {
 	 * 
 	 * Pre-cond: the teacher and her class should exist.
 	 */
-	public void addNoLunchDate(String emailTeacher, SimpleDate date) {}
+	public void addNoLunchDate(String emailTeacher, SimpleDate date) {
+		system.addNoLunchDate(emailTeacher, date);
+	}
 
 	/**
 	 * This is to check if a class has no lunch on a given date.
 	 * 
 	 * Pre-cond: the class should exist.
 	 */
-	public boolean hasNoLunch(String className, SimpleDate date) { return false; }
+	public boolean hasNoLunch(String className, SimpleDate date) { 
+		return system.hasNoLunch(className, date);
+	}
 	
 	/**
 	 * This is to add a parent-role to a teacher.
 	 * 
 	 * Pre-cond: the teacher should exist.
 	 */
-	public void addParentRoleToTeacher(String teacherEmail) {}
+	public void addParentRoleToTeacher(String teacherEmail) {
+		system.addParentRoleToTeacher(teacherEmail);
+	}
 	
 	/**
 	 * This is to remove the parent-role from a teacher.
 	 * 
 	 * Pre-cond: the teacher/parent should exist.
 	 */
-	public void removeParentRoleFromTeacher(String teacherEmail) {}
+	public void removeParentRoleFromTeacher(String teacherEmail) {
+		system.removeParentRoleFromTeacher(teacherEmail);
+	}
 	
 	/**
 	 * This is to set a child of a given parent to use the standard cost scheme.
 	 * 
 	 * Pre-cond: the parent and child should exist. The child should belong to the parent.
 	 */
-	public void setToStandardCostScheme(String emailParent, String childName) {}
+	public void setToStandardCostScheme(String emailParent, String childName) {
+		system.setToStandardCostScheme(emailParent, childName);
+	}
 
 	/**
 	 * This is to set a child of a given parent to use the pay-afront cost shceme.
 	 * 
 	 * Pre-cond: the parent and child should exist. The child should belong to the parent.
 	 */
-	public void setToPayAfrontCostScheme(String emailParent, String childName) {}
+	public void setToPayAfrontCostScheme(String emailParent, String childName) {
+		system.setToStandardCostScheme(emailParent, childName);
+	}
 	
 	/**
 	 * This is to calculate the cost of lunch of a given child, for a given year.
@@ -197,28 +231,36 @@ public class SystemTI implements SLMSTestInterface {
 	 * 
 	 * Pre-cond: the child should exist. 
 	 */
-	public int calculateCost(String childName, int year) { return 0; }
+	public int calculateCost(String childName, int year) { 
+		return system.calculateCost(childName, year);
+	}
 	
 	/**
 	 * This is to add a coordinator-role to a parent.
 	 * 
 	 * Pre-cond: the parent should exist.
 	 */
-	public void promoteToCoordinator(String emailParent) {}
+	public void promoteToCoordinator(String emailParent) {
+		system.promote(emailParent);
+	}
 
 	/**
 	 * This is to remove the coordinator-role from a parent.
 	 * 
 	 * Pre-cond: the parent should exist.
 	 */
-	public void demoteFromCoordinator(String emailCoordinator) {}
+	public void demoteFromCoordinator(String emailCoordinator) {
+		system.demote(emailCoordinator);
+	}
 	
 	/**
 	 * This is to check if a parent is a coordinator.
 	 * 
 	 * Pre-cond: the parent should exist.
 	 */
-	public boolean isCoordinator(String emailUser) { return false; }
+	public boolean isCoordinator(String emailUser) { 
+		return system.isCoordinator(emailUser);
+	}
 
 
 }

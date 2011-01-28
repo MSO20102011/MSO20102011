@@ -12,6 +12,8 @@ public class Parent extends UserDecorator {
 
     public Parent(User u) {
         super(u);
+        childrenList   = new LinkedList<Child>();
+        availabilities = new LinkedList<Availability>();
     }
 
     public void addChild(Child child) {
