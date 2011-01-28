@@ -173,7 +173,7 @@ public class SLMS {
         return p.isAvailable(d);
     }
     public boolean isUnavailable(String emailParent, SimpleDate d) {
-        return this.isAvailable(emailParent, d);
+        return !this.isAvailable(emailParent, d);
 
     }
     public boolean isPreferred(String emailParent, SimpleDate d) {

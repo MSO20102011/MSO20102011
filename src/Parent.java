@@ -39,6 +39,8 @@ public class Parent extends UserDecorator {
         Availability a = new Availability();
         a.date = date;
         a.preferred = preferred;
+        availabilities.addFirst(a);
+
     }
 
     public boolean isAvailable(SimpleDate d) {
