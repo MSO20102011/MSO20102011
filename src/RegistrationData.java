@@ -1,6 +1,6 @@
 import utils.*;
 
-/*data used for the registration process*/
+/* Data used for the registration process */
 public class RegistrationData 
 {
     

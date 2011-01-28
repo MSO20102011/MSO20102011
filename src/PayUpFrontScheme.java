@@ -3,6 +3,9 @@ import utils.*;
 public class PayUpFrontScheme implements CostScheme 
 {
 
+    /* Calculate the lunch cost for a given child and year 
+     * using the upfront pay-scheme. 20 lunches are paid for, 
+     * after that the costs are 2.50 per lunch. */
 	public int calculateCost(Child child, int year)
 	{
         int n = 0;

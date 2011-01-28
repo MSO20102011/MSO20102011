@@ -6,6 +6,7 @@ public class Administrator extends UserDecorator {
 	public Administrator(User u, SLMS sys) {
 		super(u);
 		sys = system;
+		this.registration = new RegistrationManager(sys);
 	}
     
     public void promote(String parent) {
