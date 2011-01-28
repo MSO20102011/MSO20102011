@@ -14,13 +14,18 @@ public class User {
         this.password = passwd;
     }
     
+    /* Try to login to the system. */
     public void login(String email, String password){ }
     
+    /* Logout of the system. */
     public void logout(String email, String password){ }
     
+    /* View the pupils in every lunch-group. */
     public void viewPupilGroups(){ }
     
+    /* View the dates on which there is no lunch. */
     public void viewNoLunchDates(){ }
     
+    /* View the supervision schedule. */
     public void viewSupervisionSchedule(){ }
 }
