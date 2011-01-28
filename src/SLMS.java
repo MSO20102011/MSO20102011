@@ -139,6 +139,7 @@ public class SLMS {
         Parent p = getParent(emailParent); 
         Child ch = getChildByName(childName);
         p.addChild(ch);
+        ch.parent = p;
     }
     public void addLunch(String emailParent, String childName, SimpleDate date) {
         Parent p = getParent(emailParent);
@@ -155,6 +156,7 @@ public class SLMS {
         Child child = new Child(childName);
         Class c = getClass(classname);
         c.addPupil(child);
+        child.class_ = c;
     }
 
     public boolean hasNoLunch(String classname, SimpleDate d) {
