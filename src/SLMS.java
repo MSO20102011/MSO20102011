@@ -53,7 +53,6 @@ public class SLMS {
         User u = newUser(name, email, pwd);
         Teacher t = new Teacher(u);
         users.put(email, t);
-        System.out.println("Added teacher: " + email);
     }
 
     public Teacher getTeacher(User u) {
@@ -66,12 +65,27 @@ public class SLMS {
         return null;
     }
     public Teacher getTeacher(String emailTeacher) {
-        System.out.println("Searching for teacher: " + emailTeacher);
         User u = users.get(emailTeacher);
         Teacher t = getTeacher(u);
         if (t == null) throw new IllegalArgumentException();
         return t;
 
+    }
+    public Parent getParent(User u) {
+        if (u instanceof Parent) {
+            return (Parent) u;
+        }
+        if (u instanceof UserDecorator) {
+            return getParent(((UserDecorator) u).decoratedUser);
+        }
+        return null;
+
+    }
+    public Parent getParent(String emailParent) {
+        User u = users.get(emailParent);
+        Parent p = getParent(u);
+        if (p == null) throw new IllegalArgumentException();
+        return p;
     }
 
     public void assignTeacher(String emailTeacher, String className) {
@@ -82,7 +96,12 @@ public class SLMS {
     }
     
     public boolean isTeacherOf(String emailTeacher, String className) {
-        return getTeacher(emailTeacher).schoolClass.name.equals(className);
+        try {
+            return getTeacher(emailTeacher).schoolClass.name.equals(className); 
+        }
+        catch (Exception e) {
+            return false;
+        }
     }
 
     public void addChild(String emailParent, String childName) {
@@ -109,15 +128,15 @@ public class SLMS {
         return getClass(classname).hasNoLunch(d);
     }
     public void addUnavailableDate(String emailParent, SimpleDate d) {
-        Parent p = null; // parent opzoeken
+        Parent p = getParent(emailParent);
         p.addAvailability(d, false);
     }
     public void addPreferDate(String emailParent, SimpleDate d) {
-        Parent p = null; // parent opzoeken
+        Parent p = getParent(emailParent);
         p.addAvailability(d, true);
     }
     public boolean isAvailable(String emailParent, SimpleDate d) {
-        Parent p = null; // parent opzoeken
+        Parent p = getParent(emailParent);
         return p.isAvailable(d);
     }
     public boolean isUnavailable(String emailParent, SimpleDate d) {
@@ -125,7 +144,7 @@ public class SLMS {
 
     }
     public boolean isPreferred(String emailParent, SimpleDate d) {
-        Parent p = null; // parent opzoeken
+        Parent p = getParent(emailParent);
         return p.isPreferred(d);
 
     }
@@ -135,12 +154,12 @@ public class SLMS {
     }
     public boolean isChildOf(String childName, String emailParent) {
         Child ch = null; // child opzoeken
-        Parent p = null; // parent opzoeken
+        Parent p = getParent(emailParent);
         return p.isChildOf(ch);
     }
     public void setToPayAFrontCostScheme(String emailParent, String childName) {
         Child ch = null; //child opzoeken
-        Parent p = null; // parent opzoeken
+        Parent p = getParent(emailParent);
         if (p.isChildOf(ch)) 
             ch.setToPayAFrontCostScheme();
     }
