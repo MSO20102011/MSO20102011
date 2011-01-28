@@ -8,7 +8,6 @@ public class SLMS {
 
     // We use a hashtable to make lookups on e-mail addresses faster.
     public Hashtable<String, User> users; 
-    public Hashtable<String, Teacher> teachers; // Todo: Teacher -> User
     public Hashtable<String, Administrator> admins; // Todo: Administrator -> User
     public Hashtable<String, Class> classes;
 
@@ -25,7 +24,6 @@ public class SLMS {
 
     public void resetState() {
         this.users    = new Hashtable<String, User> ();
-        this.teachers = new Hashtable<String, Teacher> ();
         this.admins   = new Hashtable<String, Administrator> ();
         this.classes  = new Hashtable<String, Class>();
     }
@@ -55,12 +53,25 @@ public class SLMS {
         User u = newUser(name, email, pwd);
         Teacher t = new Teacher(u);
         users.put(email, t);
+        System.out.println("Added teacher: " + email);
     }
 
+    public Teacher getTeacher(User u) {
+        if (u instanceof Teacher) {
+            return (Teacher) u;
+        }
+        if (u instanceof UserDecorator) {
+            return getTeacher(((UserDecorator) u).decoratedUser);
+        }
+        return null;
+    }
     public Teacher getTeacher(String emailTeacher) {
-        Teacher t = teachers.get(emailTeacher);
+        System.out.println("Searching for teacher: " + emailTeacher);
+        User u = users.get(emailTeacher);
+        Teacher t = getTeacher(u);
         if (t == null) throw new IllegalArgumentException();
         return t;
+
     }
 
     public void assignTeacher(String emailTeacher, String className) {
