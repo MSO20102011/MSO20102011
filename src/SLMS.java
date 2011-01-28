@@ -54,6 +54,10 @@ public class SLMS {
         registeredUsers.put(email, t);
     }
 
+    public User getUser(String email) {
+        return registeredUsers.get(email);
+    }
+
     public Teacher getTeacher(User u) {
         if (u instanceof Teacher) {
             return (Teacher) u;
@@ -64,7 +68,7 @@ public class SLMS {
         return null;
     }
     public Teacher getTeacher(String emailTeacher) {
-        User u = registeredUsers.get(emailTeacher);
+        User u = getUser(emailTeacher);
         Teacher t = getTeacher(u);
         if (t == null) throw new IllegalArgumentException();
         return t;
@@ -81,10 +85,27 @@ public class SLMS {
 
     }
     public Parent getParent(String emailParent) {
-        User u = registeredUsers.get(emailParent);
+        User u = getUser(emailParent);
         Parent p = getParent(u);
         if (p == null) throw new IllegalArgumentException();
         return p;
+    }
+
+    public Coordinator getCoordinator(User u) {
+        if (u instanceof Coordinator) {
+            return (Coordinator) u;
+        }
+        if (u instanceof UserDecorator) {
+            return getCoordinator(((UserDecorator) u).decoratedUser);
+        }
+        return null;
+    }
+
+    public Coordinator getCoordinator(String emailCoor) {
+        User u = getUser(emailCoor);
+        Coordinator c = getCoordinator(u);
+        if (c == null) throw new IllegalArgumentException();
+        return c;
     }
 
     public Child getChildByName(String childName) {
@@ -123,7 +144,7 @@ public class SLMS {
         Parent p = getParent(emailParent);
         Child ch = getChildByName(childName);
         if (p.isChildOf(ch)) {
-            // TODO: p.addLunch(ch, date);
+            p.addLunchDate(ch, date);
         }
     }
     public void addNoLunchDate(String emailTeacher, SimpleDate date) {
@@ -181,12 +202,29 @@ public class SLMS {
         if (p.isChildOf(ch)) 
             ch.setToStandardCostScheme();
     }
-    public void addParentRoleToTeacher(String teacherEmail) {}
+    public void addParentRoleToTeacher(String teacherEmail) {
+        Teacher t = getTeacher(teacherEmail);
+        Parent p = new Parent(t);
+        registeredUsers.put(teacherEmail, p);
+    }
+
     public void removeParentRoleFromTeacher(String teacherEmail) {}
     public void promote(String emailParent) {}
     public void demote(String coordinator) {}
-    public boolean isCoordinator(String emailUser) { return false;}
+    public boolean isCoordinator(String emailUser) { 
+        try {
+            Coordinator c = getCoordinator(emailUser);
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
+    }
     public int calculateCost(String childName, int year) { return 0; }
-    public boolean hasLunch(String childName, SimpleDate d) { return false; }
+
+    public boolean hasLunch(String childName, SimpleDate d) { 
+        Child ch = getChildByName(childName);
+        return ch.hasLunch(d);
+    }
     
 }

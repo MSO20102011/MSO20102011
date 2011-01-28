@@ -27,6 +27,7 @@ public class Parent extends UserDecorator {
     }
     public void viewLunchSchedule(Child child) { }
     public void addLunchDate(Child child, SimpleDate date) {
+        child.schedule.addLunch(date);
     }
     public void remLunchDate(Child child, SimpleDate date) {
         

@@ -8,7 +8,6 @@ public class LunchSchedule {
         lunches = new LinkedList<SimpleDate>();
 
     }
-
     public void addLunch(SimpleDate d) {
         lunches.add(d);
     }

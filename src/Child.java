@@ -8,6 +8,8 @@ public class Child {
 
     public Child(String name) {
         this.name = name;
+        this.schedule = new LunchSchedule();
+        this.costscheme = new PayUpFrontScheme();
     }
     public boolean hasLunch(SimpleDate d) {
         return schedule.lunches.contains(d);
